@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import Area from '../Areas/Areas';
+import Header from '../Header/Header';
 
 const Layout = () => {
+    const [showJson, setShowJson] = useState(false);
+
+    const handleSwitch = () => {
+        setShowJson(prevState => !prevState);
+    }
+
     return (
-        <div>Hi, :)</div>
+        <>
+        <Header handleSwitch={handleSwitch} />
+            <Area showJson={showJson} />
+        </>
     )
 }
 

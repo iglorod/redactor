@@ -1,0 +1,17 @@
+.popover {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+
+.arrow {
+    display: none !important;
+}
+
+.github-picker {
+    width: 212px !important;
+}
+
+.color-picker-button {
+    margin: 0 15px;
+}
