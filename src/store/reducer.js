@@ -43,6 +43,7 @@ const reducer = (state = initialState, action) => {
 
         case actionTypes.ADD_BREAK: {
             const textPiecesClone = [...state.textPieces];
+            let cursorIndex = action.pieceIndex + 2;
 
             const leftText = textPiecesClone[action.pieceIndex].text.split('');
             const rightText = leftText.splice(action.caretPosition, leftText.length - action.caretPosition);
@@ -51,13 +52,18 @@ const reducer = (state = initialState, action) => {
             const rightObj = { ...textPiecesClone[action.pieceIndex] };
             rightObj.text = rightText.join('');
 
+            
             textPiecesClone.splice(action.pieceIndex + 1, 0, {}, rightObj);
+            if (textPiecesClone[action.pieceIndex].text.length === 0 && textPiecesClone[action.pieceIndex - 1] && textPiecesClone[action.pieceIndex - 1].text) {
+                textPiecesClone.splice(action.pieceIndex, 1);
+                cursorIndex = action.pieceIndex + 1;
+            }
 
             return {
                 ...state,
                 textPieces: [...textPiecesClone],
                 selectionRange: [0, 0],
-                pieceIndex: action.pieceIndex + 2,
+                pieceIndex: cursorIndex,
             };
         }
 
