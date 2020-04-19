@@ -1,27 +1,21 @@
 import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 
-import { setSelectionRangeActionCreator } from '../../../../store/actions';
-import { getSelection, setCaret } from '../../../../utility/selection';
+import { setSelectionRangeActionCreator } from '../../../store/actions';
+import { getSelection, setCaret } from '../../../utility/selection';
 
 const TextItem = props => {
+    const { piece } = props;
+    const spanEl = useRef(null);
+
     useEffect(() => {
         if (props.cursorPosition === null) return;
-        if (spanEl.current) spanEl.current.focus();
 
+        if (spanEl.current) spanEl.current.focus();
         setCaret(spanEl.current ? spanEl.current.childNodes[0] : null, props.cursorPosition);
     }, [props.cursorPosition]);
 
-    const spanEl = useRef(null);
-    const { piece } = props;
-
     if (Object.keys(piece).length === 0) return <br />
-
-    const textStyle = {
-        fontSize: piece.fontSize,
-        color: piece.color,
-        backgroundColor: piece.backgroundColor,
-    }
 
     const changeHandler = (event) => {
         const content = event.target.textContent;
@@ -48,6 +42,12 @@ const TextItem = props => {
         const range = getSelection();
         if (range[0] < range[1]) props.setSelection(props.index, range);
         else if (range[0] > range[1]) props.setSelection(props.index, range.reverse());
+    }
+
+    const textStyle = {
+        fontSize: piece.fontSize,
+        color: piece.color,
+        backgroundColor: piece.backgroundColor,
     }
 
     return (

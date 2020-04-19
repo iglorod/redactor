@@ -1,17 +1,28 @@
 import React from 'react';
-import Switch from '../UI/Switch/Switch';
+import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
 
+import { getTextPiecesJson } from '../../utility/text-blocks';
 import TextActions from './TextActions/TextActions';
 import classes from './Header.module.css';
 
 const Header = (props) => {
+    const showJson = () => {
+        console.log(getTextPiecesJson(props.textPieces));
+    }
 
     return (
         <header className={classes.header}>
             <TextActions />
-            <Switch label='Show JSON' onChange={props.handleSwitch} />
+            <Button variant="light" onClick={showJson}>Show JSON (in concole)</Button>
         </header>
     )
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+    return {
+        textPieces: state.textPieces,
+    }
+}
+
+export default connect(mapStateToProps)(Header);

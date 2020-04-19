@@ -1,8 +1,8 @@
-import React, { useCallback, useMemo } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import TextItem from './TextItem/TextItem';
-import { changeTextActionCreator, addBreakActionCreator, removeBreakActionCreator } from '../../../store/actions';
+import { changeTextActionCreator, addBreakActionCreator, removeBreakActionCreator } from '../../store/actions';
 import './TextArea.css';
 
 const TextArea = (props) => {
@@ -29,16 +29,14 @@ const TextArea = (props) => {
         <div className='area'>
             {
                 props.textPieces.map((piece, index) => (
-                    <React.Fragment key={index}>
-                    {console.log(piece)}
-                        <TextItem
-                            piece={piece}
-                            index={index}
-                            cursorPosition={index === cursor.index ? cursor.position : null}
-                            addBreak={addBreak}
-                            removeBreak={removeBreak}
-                            onChange={textTypingHandler} />
-                    </React.Fragment>
+                    <TextItem
+                        key={index}
+                        piece={piece}
+                        index={index}
+                        cursorPosition={index === cursor.index ? cursor.position : null}
+                        addBreak={addBreak}
+                        removeBreak={removeBreak}
+                        onChange={textTypingHandler} />
                 ))
             }
         </div>

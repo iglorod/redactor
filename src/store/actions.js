@@ -42,9 +42,3 @@ export const setNewPropertyActionCreator = (selectedRange, pieceIndex, property)
     }
 }
 
-export const clearSelectionRangeActionCreator = () => {
-    return {
-        type: actionTypes.CLEAR_SELECTION,
-    }
-}
-

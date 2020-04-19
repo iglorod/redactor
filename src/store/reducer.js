@@ -4,25 +4,25 @@ import { joinTextPiecesByIndex, joinTextPieces, splitTextPiece } from '../utilit
 const initialState = {
     textPieces: [
         {
-            text: 'Start typing here...',
-            fontSize: '12px',
-            color: 'red',
-            backgroundColor: 'grey',
+          text: 'Hi My lovely',
+          fontSize: '16px',
+          color: '#5300eb',
+          backgroundColor: '#fad0c3'
         },
         {
-            text: 'Start typing here...',
-            fontSize: '14px',
-            color: 'white',
-            backgroundColor: 'black',
+          text: 'little',
+          fontSize: '32px',
+          color: '#db3e00',
+          backgroundColor: '#c1e1c5'
         },
         {},
         {
-            text: 'Start typing here...',
-            fontSize: '14px',
-            color: 'white',
-            backgroundColor: 'black',
-        },
-    ],
+          text: 'Ponny',
+          fontSize: '14px',
+          color: '#ffffff',
+          backgroundColor: '#006b76'
+        }
+      ],
     selectionRange: [0, 0],
     pieceIndex: 0,
 }
@@ -94,10 +94,6 @@ const reducer = (state = initialState, action) => {
                 selectionRange: range,
                 pieceIndex: action.pieceIndex,
             };
-        }
-
-        case actionTypes.CLEAR_SELECTION: {
-            return initialState;
         }
 
         case actionTypes.SET_NEW_PROPERTY: {

@@ -19,6 +19,7 @@ const FontSizePicker = (props) => {
                 {
                     fontSizesArray.map(fontSize => (
                         <FronSizeItem
+                            key={fontSize}
                             fontSize={fontSize}
                             currFontSize={props.fontSize}
                             changeFontSize={props.changeFontSize.bind(this, fontSize)} />
