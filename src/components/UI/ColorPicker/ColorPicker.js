@@ -6,7 +6,7 @@ import './ColorPicker.css';
 
 const ColorPicker = (props) => {
     const popover = (
-            <GithubPicker triangle={'hide'} onChangeComplete={props.handleChange} />
+        <GithubPicker triangle={'hide'} onChangeComplete={props.handleChange} />
     )
 
     return (
@@ -18,12 +18,14 @@ const ColorPicker = (props) => {
             overlay={
                 <Popover>
                     <Popover.Content>
-                      {popover}
+                        {popover}
                     </Popover.Content>
                 </Popover>
             }
         >
-           <Button className={'color-picker-button'} variant="light">{props.label}</Button>
+            <Button className={'color-picker-button'} variant="light">
+                {props.label}
+            </Button>
         </OverlayTrigger>
     )
 }

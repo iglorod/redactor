@@ -1,13 +1,16 @@
 import React, { useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
 
-import { getSelection, setCaret } from '../../.././../../utility/selection';
+import { setSelectionRangeActionCreator } from '../../../../store/actions';
+import { getSelection, setCaret } from '../../../../utility/selection';
 
-const TextItem = React.memo(props => {
+const TextItem = props => {
     useEffect(() => {
         if (props.cursorPosition === null) return;
-        spanEl.current.focus();
+        if (spanEl.current) spanEl.current.focus();
+
         setCaret(spanEl.current ? spanEl.current.childNodes[0] : null, props.cursorPosition);
-    });
+    }, [props.cursorPosition]);
 
     const spanEl = useRef(null);
     const { piece } = props;
@@ -41,6 +44,12 @@ const TextItem = React.memo(props => {
         }
     }
 
+    const setSelectionRange = () => {
+        const range = getSelection();
+        if (range[0] < range[1]) props.setSelection(props.index, range);
+        else if (range[0] > range[1]) props.setSelection(props.index, range.reverse());
+    }
+
     return (
         <span
             ref={spanEl}
@@ -48,12 +57,19 @@ const TextItem = React.memo(props => {
             className={'text-block'}
             contentEditable
             suppressContentEditableWarning
+            onSelect={setSelectionRange}
             onKeyDown={breakStringHandler}
             onInput={changeHandler}
         >
             {piece.text}
         </span>
     )
-})
+}
 
-export default TextItem;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setSelection: (pieceIndex, range) => { dispatch(setSelectionRangeActionCreator(pieceIndex, range)) },
+    }
+}
+
+export default connect(null, mapDispatchToProps)(TextItem);
